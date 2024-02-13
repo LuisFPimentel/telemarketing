@@ -164,6 +164,24 @@ def main():
         except:
             st.error('Erro no filtro')
 
+        # Botões de download dos dados dos gráficos
+        col1, col2 = st.columns(2)
+
+        df_xlsx = to_excel(bank_raw_target_perc)
+        col1.write('### Proporção original')
+        col1.write(bank_raw_target_perc)
+        col1.download_button(label='📥 Download',
+                            data=df_xlsx ,
+                            file_name= 'bank_raw_y.xlsx')
+        
+        df_xlsx = to_excel(bank_target_perc)
+        col2.write('### Proporção da tabela com filtros')
+        col2.write(bank_target_perc)
+        col2.download_button(label='📥 Download',
+                            data=df_xlsx ,
+                            file_name= 'bank_y.xlsx')
+        st.markdown("---")
+
         # st.write('## Proporção de aceite')
         # PLOTS    
         if graph_type == 'Barras':
